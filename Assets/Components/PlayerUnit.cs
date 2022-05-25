@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Mover))]
+[RequireComponent(typeof(Health))]
 [RequireComponent(typeof(PlayerController))]
 public class PlayerUnit : UnitBase, IKnockbackReceiver
 {

@@ -15,7 +15,7 @@ TagManager:
   - Enemy
   - Neutral
   - Environment
-  - 
+  - Floor
   - 
   - 
   - 
@@ -40,4 +40,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Floor
+    uniqueID: 4139157451
+    locked: 0
+  - name: Entities
+    uniqueID: 1218766833
     locked: 0
