@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,12 @@ public class Health : MonoBehaviour, IHealth
         get { return maxHealth; }
     }
     public bool IsInvulnerable { get; set; }
+
+    private void Awake()
+    {
+        CurrentHealth = MaxHealth;
+    }
+
     public void IncreaseHealth(int amount)
     {
         CurrentHealth += amount;

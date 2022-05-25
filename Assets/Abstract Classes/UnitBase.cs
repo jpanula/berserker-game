@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 public abstract class UnitBase : MonoBehaviour, IDamageReceiver
 {
+
     private IMover _mover;
     private IHealth _health;
+    private Weapon[] _weapons;
 
     public IMover Mover
     {
@@ -43,5 +46,18 @@ public abstract class UnitBase : MonoBehaviour, IDamageReceiver
         return died;
     }
 
+    public void Attack()
+    {
+        foreach (var weapon in _weapons)
+        {
+            weapon.Use();
+        }
+    }
+    
     protected abstract void Die();
+
+    protected void Awake()
+    {
+        _weapons = GetComponentsInChildren<Weapon>(includeInactive: true);
+    }
 }

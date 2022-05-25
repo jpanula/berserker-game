@@ -5,10 +5,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Mover))]
+[RequireComponent(typeof(PlayerUnit))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private IMover _mover;
-
+    private IMover _mover;
+    private PlayerUnit _playerUnit;
+    
     public IMover Mover
     {
         get
@@ -19,6 +21,27 @@ public class PlayerController : MonoBehaviour
             }
 
             return _mover;
+        }
+    }
+
+    public PlayerUnit PlayerUnit
+    {
+        get
+        {
+            if (_playerUnit == null)
+            {
+                _playerUnit = GetComponent<PlayerUnit>();
+            }
+
+            return _playerUnit;
+        }
+    }
+    
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            PlayerUnit.Attack();
         }
     }
 
@@ -34,4 +57,5 @@ public class PlayerController : MonoBehaviour
             Mover.StopMove();
         }
     }
+    
 }
