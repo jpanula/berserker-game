@@ -10,15 +10,16 @@ GameObject:
   m_Component:
   - component: {fileID: 4392840850189553809}
   - component: {fileID: 6112628770199694768}
+  - component: {fileID: 2911454352614971995}
   - component: {fileID: 8349778064256373532}
   - component: {fileID: 7359345745076235503}
   - component: {fileID: 4894070570946629971}
   - component: {fileID: 8435956158331824503}
   - component: {fileID: 3785326893643287562}
   - component: {fileID: 1870125440758402739}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TestPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,8 +33,8 @@ Transform:
   m_GameObject: {fileID: 2688052532487385650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.8234138, y: 1.0159876, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3835881321652089868}
   m_Father: {fileID: 0}
@@ -91,6 +92,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &2911454352614971995
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2688052532487385650}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
 --- !u!50 &8349778064256373532
 Rigidbody2D:
   serializedVersion: 4
@@ -163,6 +180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8eee765e4044d447802b9be7cb3e7d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1870125440758402739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,7 +313,7 @@ GameObject:
   - component: {fileID: 1276133025944419754}
   - component: {fileID: 4220699716415681485}
   - component: {fileID: 1757607895952444250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TestPlayerWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
