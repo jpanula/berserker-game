@@ -8,29 +8,48 @@ public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] private int damage;
     [SerializeField] private float cooldownTime;
-
-    private Timer _cooldownTimer;
+    [SerializeField] private float knockbackStrength;
+    [SerializeField] private Timer cooldownTimer;
 
     public int Damage
     {
         get { return damage; }
     }
+
+    public float KnockbackStrength
+    {
+        get { return knockbackStrength; }
+    }
+
+    public Timer CooldownTimer
+    {
+        get
+        {
+            if (cooldownTimer == null)
+            {
+                cooldownTimer = GetComponent<Timer>();
+            }
+
+            return cooldownTimer;
+        }
+    }
     
     public bool CanUse
     {
-        get { return _cooldownTimer.IsCompleted; }
+        get { return CooldownTimer.IsCompleted; }
     }
 
     public abstract void Use();
 
     protected void ResetTimer()
     {
-        _cooldownTimer.SetTime(cooldownTime);
-        _cooldownTimer.StartTimer();
+        CooldownTimer.SetTime(cooldownTime);
+        CooldownTimer.StartTimer();
     }
 
     protected virtual void Awake()
     {
-        _cooldownTimer = GetComponent<Timer>();
+        cooldownTimer = GetComponent<Timer>();
+        ResetTimer();
     }
 }

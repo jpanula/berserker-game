@@ -35,7 +35,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageReceiver
     }
 
 
-    public bool TakeDamage(int amount)
+    public virtual bool TakeDamage(int amount)
     {
         bool died = Health.DecreaseHealth(amount);
         if (died)

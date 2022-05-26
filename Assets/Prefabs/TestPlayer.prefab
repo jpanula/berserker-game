@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8435956158331824503}
   - component: {fileID: 3785326893643287562}
   - component: {fileID: 1870125440758402739}
+  - component: {fileID: 1703018911721692933}
   m_Layer: 6
   m_Name: TestPlayer
   m_TagString: Player
@@ -183,6 +184,8 @@ MonoBehaviour:
   playerDeathEvent:
     m_PersistentCalls:
       m_Calls: []
+  damageTakenCooldown: 0
+  invulnerabilityTimer: {fileID: 1703018911721692933}
 --- !u!114 &1870125440758402739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +304,18 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1703018911721692933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2688052532487385650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 170e5d8ed8d5cff46a6fb3e988a6c3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8606359471434766684
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,6 +328,7 @@ GameObject:
   - component: {fileID: 1276133025944419754}
   - component: {fileID: 4220699716415681485}
   - component: {fileID: 1757607895952444250}
+  - component: {fileID: 3892379158195043076}
   m_Layer: 6
   m_Name: TestPlayerWeapon
   m_TagString: Untagged
@@ -328,7 +344,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8606359471434766684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.5, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -413,5 +429,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   cooldownTime: 0.5
+  knockbackStrength: 1000
+  cooldownTimer: {fileID: 4220699716415681485}
   movementRadius: 1.5
   aimingSpeed: 3
+  attackCollider: {fileID: 3892379158195043076}
+--- !u!58 &3892379158195043076
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8606359471434766684}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 2.25, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.8
