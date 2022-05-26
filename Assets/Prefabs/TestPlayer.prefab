@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4392840850189553809}
   - component: {fileID: 6112628770199694768}
+  - component: {fileID: 2911454352614971995}
   - component: {fileID: 8349778064256373532}
   - component: {fileID: 7359345745076235503}
   - component: {fileID: 4894070570946629971}
   - component: {fileID: 8435956158331824503}
   - component: {fileID: 3785326893643287562}
   - component: {fileID: 1870125440758402739}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TestPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,6 +92,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &2911454352614971995
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2688052532487385650}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
 --- !u!50 &8349778064256373532
 Rigidbody2D:
   serializedVersion: 4
@@ -293,7 +310,7 @@ GameObject:
   - component: {fileID: 1276133025944419754}
   - component: {fileID: 4220699716415681485}
   - component: {fileID: 1757607895952444250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TestPlayerWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
