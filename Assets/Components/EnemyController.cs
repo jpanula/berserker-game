@@ -66,7 +66,7 @@ public class EnemyController : MonoBehaviour
         RaycastHit2D hit;
         hit = Physics2D.CircleCast(currentPosition,
             Collider.radius * Mathf.Max(ownTransform.localScale.x, ownTransform.localScale.y), movementVector, movementVector.magnitude, LayerMask.GetMask("Environment"));
-        
+
         if (hit)
         {
             var path = PathGridManager.Instance.FindPath(currentPosition, playerPosition);

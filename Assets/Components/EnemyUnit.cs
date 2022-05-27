@@ -14,6 +14,6 @@ public class EnemyUnit : UnitBase, IKnockbackReceiver
 
     public void TakeKnockback(Vector2 knockbackVector)
     {
-        Mover.Physicsbody.AddForce(knockbackVector);
+        Mover.Physicsbody.AddForce(knockbackVector, ForceMode2D.Impulse);
     }
 }

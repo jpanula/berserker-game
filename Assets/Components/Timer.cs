@@ -44,11 +44,6 @@ public class Timer : MonoBehaviour, ITimer
         }
     }
 
-    private void Awake()
-    {
-        Stop();
-    }
-
     private void Update()
     {
         if (IsRunning)
