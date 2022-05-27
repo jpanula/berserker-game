@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9176685938976598545}
   - component: {fileID: 4074196850931590380}
   - component: {fileID: 191237524425219812}
+  - component: {fileID: 5119902391618947362}
   m_Layer: 6
   m_Name: Weapon
   m_TagString: Untagged
@@ -28,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 4818735259192997433}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1855460193730346346}
   m_RootOrder: 0
@@ -112,8 +113,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   cooldownTime: 0.5
-  movementRadius: 1.5
+  knockbackStrength: 0
+  cooldownTimer: {fileID: 0}
+  movementRadius: 1
   aimingSpeed: 3
+  attackCollider: {fileID: 0}
+--- !u!58 &5119902391618947362
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4818735259192997433}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &5955943736157617023
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +152,8 @@ GameObject:
   - component: {fileID: 5775343688853447129}
   - component: {fileID: 698121916718948198}
   - component: {fileID: 4702941574293056433}
+  - component: {fileID: 115651229721849577}
+  - component: {fileID: 214665339113356957}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -202,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3538df484352d69439a4c491ea72082b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 10
 --- !u!114 &2261895561429899836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +252,15 @@ MonoBehaviour:
   playerDeathEvent:
     m_PersistentCalls:
       m_Calls: []
+  damageTakenCooldown: 1
+  blinkCooldown: 4
+  blinkVariance: 4
+  movementThreshold: 0.8
+  movementSpeedAnimationMultiplier: 0.25
+  spriteRenderer: {fileID: 698121916718948198}
+  playerAnimator: {fileID: 4702941574293056433}
+  invulnerabilityTimer: {fileID: 115651229721849577}
+  blinkTimer: {fileID: 214665339113356957}
 --- !u!70 &6286484319199099599
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -436,3 +467,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &115651229721849577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5955943736157617023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 170e5d8ed8d5cff46a6fb3e988a6c3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &214665339113356957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5955943736157617023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 170e5d8ed8d5cff46a6fb3e988a6c3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
