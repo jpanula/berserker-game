@@ -2,17 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CircleCollider2D))]
 public class PlayerWeapon : Weapon
 {
+    
     [SerializeField] private float movementRadius;
     [SerializeField] private float aimingSpeed;
     [SerializeField] private CircleCollider2D attackCollider;
     
     private Camera _mainCamera;
     private Vector3 _mousePosition;
+    private Animator _animator;
 
     public CircleCollider2D AttackCollider
     {
@@ -26,11 +29,25 @@ public class PlayerWeapon : Weapon
             return attackCollider;
         }
     }
+
+    public Animator Animator
+    {
+        get
+        {
+            if (_animator == null)
+            {
+                _animator = GetComponent<Animator>();
+            }
+
+            return _animator;
+        }
+    }
     
     public override void Use()
     {
         if (CanUse)
         {
+            Animator.SetTrigger("Attack");
             ResetTimer();
             List<Collider2D> hitColliders = new List<Collider2D>();
             AttackCollider.GetContacts(hitColliders);

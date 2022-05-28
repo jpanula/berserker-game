@@ -67,7 +67,7 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
             return playerAnimator;
         }
     }
-    
+
     public override bool TakeDamage(int amount)
     {
         bool result = base.TakeDamage(amount);
@@ -85,9 +85,12 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
 
     public void TakeKnockback(Vector2 knockbackVector)
     {
-        Mover.Physicsbody.AddForce(knockbackVector, ForceMode2D.Impulse);
+        if (!Health.IsInvulnerable)
+        {
+            Mover.Physicsbody.AddForce(knockbackVector, ForceMode2D.Impulse);
+        }
     }
-
+    
     private void Start()
     {
         if (blinkTimer)

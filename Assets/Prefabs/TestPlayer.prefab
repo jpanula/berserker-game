@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3785326893643287562}
   - component: {fileID: 1870125440758402739}
   - component: {fileID: 1703018911721692933}
+  - component: {fileID: 4599318376242024098}
   m_Layer: 6
   m_Name: TestPlayer
   m_TagString: Player
@@ -184,8 +185,18 @@ MonoBehaviour:
   playerDeathEvent:
     m_PersistentCalls:
       m_Calls: []
+  playerAttack:
+    m_PersistentCalls:
+      m_Calls: []
   damageTakenCooldown: 0
+  blinkCooldown: 0
+  blinkVariance: 0
+  movementThreshold: 0
+  movementSpeedAnimationMultiplier: 0
+  spriteRenderer: {fileID: 0}
+  playerAnimator: {fileID: 4599318376242024098}
   invulnerabilityTimer: {fileID: 1703018911721692933}
+  blinkTimer: {fileID: 0}
 --- !u!114 &1870125440758402739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,6 +310,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e4eed0f7-17b6-48e6-a703-2c41a463b464
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 44ebc5b0-abcc-4e0f-afff-9c0ff93fe35a
+    m_ActionName: Player/Menu[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -316,6 +331,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170e5d8ed8d5cff46a6fb3e988a6c3d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &4599318376242024098
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2688052532487385650}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8606359471434766684
 GameObject:
   m_ObjectHideFlags: 0
