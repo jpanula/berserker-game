@@ -203,3 +203,5 @@ MonoBehaviour:
   enemyAnimator: {fileID: 6017591258239058276}
   movementSpeedAnimationMultiplier: 0.5
   movementThreshold: 0.25
+  damage: 1
+  knockbackStrength: 150

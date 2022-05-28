@@ -2,18 +2,32 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public UnityEvent GameOverEvent;
+    public UnityEvent GoingBerserkEvent;
+    public UnityEvent ResurrectionEvent;
+    public UnityEvent EnemyKilledEvent;
 
     private bool _gameIsPaused;
+    private bool _playerIsBerserk;
+    private int _totalEnemiesKilled;
     
     private float _masterVolume = 0.8f;
     private float _sfxVolume = 0.8f;
     private float _musicVolume = 0.8f;
-
+    
+    
+    public static bool PlayerIsBerserk
+    {
+        get { return Instance._playerIsBerserk; }
+        set { Instance._playerIsBerserk = value; }
+    }
+    
     public static float MasterVolume
     {
         get { return Instance._masterVolume; }
@@ -36,6 +50,12 @@ public class GameManager : MonoBehaviour
     {
         get { return Instance._gameIsPaused; }
         private set { Instance._gameIsPaused = value; }
+    }
+
+    public static int TotalEnemiesKilled
+    {
+        get { return Instance._totalEnemiesKilled; }
+        private set { Instance._totalEnemiesKilled = value; }
     }
     
     public void ChangeScene(string path)
@@ -81,6 +101,16 @@ public class GameManager : MonoBehaviour
         MusicVolume = value;
         PlayerPrefs.SetFloat("MusicVolume", value);
     }
+
+    private void OnGameOver()
+    {
+        PlayerIsBerserk = false;
+    }
+    
+    private void OnEnemyKill()
+    {
+        TotalEnemiesKilled++;
+    }
     
     private void Awake()
     {
@@ -108,5 +138,9 @@ public class GameManager : MonoBehaviour
         {
             MusicVolume = PlayerPrefs.GetFloat("MusicVolume");
         }
+        
+        EnemyKilledEvent.AddListener(OnEnemyKill);
+        GameOverEvent.AddListener(OnGameOver);
     }
+
 }

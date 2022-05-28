@@ -47,15 +47,25 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (!PlayerUnit.IsDead)
         {
-            Mover.StartMove(context.ReadValue<Vector2>());
-        }
+            if (context.performed)
+            {
+                Mover.StartMove(context.ReadValue<Vector2>());
+            }
 
-        if (context.canceled)
+            if (context.canceled)
+            {
+                Mover.StopMove();
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (PlayerUnit.IsDead)
         {
             Mover.StopMove();
         }
     }
-    
 }

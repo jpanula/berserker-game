@@ -13,10 +13,22 @@ public class EnemyUnit : UnitBase, IKnockbackReceiver
     [SerializeField] private Animator enemyAnimator;
     [SerializeField] private float movementSpeedAnimationMultiplier;
     [SerializeField] private float movementThreshold;
+    [SerializeField] private int damage;
+    [SerializeField] private float knockbackStrength;
 
     private SpriteRenderer _spriteRenderer;
     private CircleCollider2D _collider;
 
+    public int Damage
+    {
+        get { return damage; }
+    }
+
+    public float KnockbackStrength
+    {
+        get { return knockbackStrength; }
+    }
+    
     public Color Color
     {
         get { return color; }
@@ -56,6 +68,7 @@ public class EnemyUnit : UnitBase, IKnockbackReceiver
         Ready = false;
         OwnCollider.enabled = false;
         EnemyAnimator.SetBool("Dead", true);
+        GameManager.Instance.EnemyKilledEvent.Invoke();
     }
 
     protected override void Awake()
