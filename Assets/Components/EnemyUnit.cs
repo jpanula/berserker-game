@@ -84,6 +84,7 @@ public class EnemyUnit : UnitBase, IKnockbackReceiver
     public void OnDeathComplete()
     {
         gameObject.SetActive(false);
+        Health.IncreaseHealth(Health.MaxHealth);
     }
 
     private void Update()
