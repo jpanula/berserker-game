@@ -46,7 +46,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageReceiver
         return died;
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         foreach (var weapon in _weapons)
         {
@@ -56,7 +56,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageReceiver
     
     protected abstract void Die();
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         _weapons = GetComponentsInChildren<Weapon>(includeInactive: true);
     }

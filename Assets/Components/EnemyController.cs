@@ -59,24 +59,32 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        var ownTransform = transform;
-        var currentPosition = ownTransform.position;
-        var playerPosition = _player.position;
-        var movementVector = playerPosition - currentPosition;
-        RaycastHit2D hit;
-        hit = Physics2D.CircleCast(currentPosition,
-            Collider.radius * Mathf.Max(ownTransform.localScale.x, ownTransform.localScale.y), movementVector, movementVector.magnitude, LayerMask.GetMask("Environment"));
-
-        if (hit)
+        if (EnemyUnit.Ready)
         {
-            var path = PathGridManager.Instance.FindPath(currentPosition, playerPosition);
-            if (path.Count >= 1)
+            var ownTransform = transform;
+            var currentPosition = ownTransform.position;
+            var playerPosition = _player.position;
+            var movementVector = playerPosition - currentPosition;
+            RaycastHit2D hit;
+            hit = Physics2D.CircleCast(currentPosition,
+                Collider.radius * Mathf.Max(ownTransform.localScale.x, ownTransform.localScale.y), movementVector,
+                movementVector.magnitude, LayerMask.GetMask("Environment"));
+
+            if (hit)
             {
+                var path = PathGridManager.Instance.FindPath(currentPosition, playerPosition);
+                if (path.Count >= 1)
+                {
 
-                movementVector = path[0].Position - currentPosition;
+                    movementVector = path[0].Position - currentPosition;
+                }
             }
-        }
 
-        Mover.StartMove(Vector3.Normalize(movementVector));
+            Mover.StartMove(Vector3.Normalize(movementVector));
+        }
+        else
+        {
+            Mover.StartMove(Vector2.zero);
+        }
     }
 }
