@@ -36,7 +36,7 @@ public abstract class Weapon : MonoBehaviour
     
     public bool CanUse
     {
-        get { return CooldownTimer.IsCompleted; }
+        get { return CooldownTimer.IsCompleted && !GameManager.GameIsPaused; }
     }
 
     public abstract void Use();
