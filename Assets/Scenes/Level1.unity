@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 640, y: -569.375}
+  m_AnchoredPosition: {x: 640, y: -588.125}
   m_SizeDelta: {x: 375, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8628509
@@ -2092,7 +2092,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Over!
+  m_text: 'Game Over!
+
+    0 enemies killed!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a96bc7673a5e45546affa33296630184, type: 2}
   m_sharedMaterial: {fileID: -7040913065992550613, guid: a96bc7673a5e45546affa33296630184, type: 2}
@@ -2186,8 +2188,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 640, y: -155.625}
-  m_SizeDelta: {x: 600, y: 100}
+  m_AnchoredPosition: {x: 640, y: -211.875}
+  m_SizeDelta: {x: 1200, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &151596358
 GameObject:
@@ -2968,7 +2970,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &604962619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3810,7 +3812,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 640, y: -286.875}
+  m_AnchoredPosition: {x: 640, y: -380.625}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1000363910
@@ -9209,7 +9211,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 640, y: -413.125}
+  m_AnchoredPosition: {x: 640, y: -469.375}
   m_SizeDelta: {x: 375, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1269846759
@@ -11987,10 +11989,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 652668022347394555, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
-      propertyPath: gameOverScreen
-      value: 
-      objectReference: {fileID: 1841542267}
     - target: {fileID: 1855460193730346346, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -12039,14 +12037,9 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1162405476}
-    - target: {fileID: 5775343688853447129, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
-      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HandlePause
-      objectReference: {fileID: 0}
     - target: {fileID: 5955943736157617023, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 652668022347394555, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
