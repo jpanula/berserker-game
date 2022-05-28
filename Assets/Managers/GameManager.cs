@@ -8,26 +8,34 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    private bool _gameIsPaused;
+    
     private float _masterVolume = 0.8f;
     private float _sfxVolume = 0.8f;
     private float _musicVolume = 0.8f;
 
-    public float MasterVolume
+    public static float MasterVolume
     {
-        get { return _masterVolume; }
-        private set { _masterVolume = value; }
+        get { return Instance._masterVolume; }
+        private set { Instance._masterVolume = value; }
     }
 
-    public float SfxVolume
+    public static float SfxVolume
     {
-        get { return _sfxVolume; }
-        private set { _sfxVolume = value; }
+        get { return Instance._sfxVolume; }
+        private set { Instance._sfxVolume = value; }
     }
 
-    public float MusicVolume
+    public static float MusicVolume
     {
-        get { return _musicVolume; }
-        private set { _musicVolume = value; }
+        get { return Instance._musicVolume; }
+        private set { Instance._musicVolume = value; }
+    }
+
+    public static bool GameIsPaused
+    {
+        get { return Instance._gameIsPaused; }
+        private set { Instance._gameIsPaused = value; }
     }
     
     public void ChangeScene(string path)
@@ -35,23 +43,45 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadSceneAsync(path, LoadSceneMode.Single);
     }
 
-    public void PauseGame()
+    public static void PauseGame()
     {
+        
+        GameIsPaused = true;
         Time.timeScale = 0;
     }
 
-    public void ResumeGame()
+    public static void ResumeGame()
     {
+        GameIsPaused = false;
         Time.timeScale = 1;
     }
     
-    public void QuitGame()
+    public static void QuitGame()
     {
         Application.Quit();
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
+    
+    public static void SetMasterVolume(float value)
+    {
+        MasterVolume = value;
+        PlayerPrefs.SetFloat("MasterVolume", value);
+    }
+
+    public static void SetSfxVolume(float value)
+    {
+        SfxVolume = value;
+        PlayerPrefs.SetFloat("SfxVolume", value);
+    }
+
+    public static void SetMusicVolume(float value)
+    {
+        MusicVolume = value;
+        PlayerPrefs.SetFloat("MusicVolume", value);
+    }
+    
     private void Awake()
     {
         if (Instance == null)
@@ -78,23 +108,5 @@ public class GameManager : MonoBehaviour
         {
             MusicVolume = PlayerPrefs.GetFloat("MusicVolume");
         }
-    }
-
-    public void SetMasterVolume(float value)
-    {
-        MasterVolume = value;
-        PlayerPrefs.SetFloat("MasterVolume", value);
-    }
-
-    public void SetSfxVolume(float value)
-    {
-        SfxVolume = value;
-        PlayerPrefs.SetFloat("SfxVolume", value);
-    }
-
-    public void SetMusicVolume(float value)
-    {
-        MusicVolume = value;
-        PlayerPrefs.SetFloat("MusicVolume", value);
     }
 }

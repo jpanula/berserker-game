@@ -11,8 +11,8 @@ public class VolumeValueLoader : MonoBehaviour
 
     public void LoadVolumeValues()
     {
-        masterVolumeSlider.value = GameManager.Instance.MasterVolume;
-        sfxVolumeSlider.value = GameManager.Instance.SfxVolume;
-        musicVolumeSlider.value = GameManager.Instance.MusicVolume;
+        masterVolumeSlider.value = GameManager.MasterVolume;
+        sfxVolumeSlider.value = GameManager.SfxVolume;
+        musicVolumeSlider.value = GameManager.MusicVolume;
     }
 }

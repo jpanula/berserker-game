@@ -12,7 +12,7 @@ public class PlayerWeapon : Weapon
     [SerializeField] private CircleCollider2D attackCollider;
     
     private Camera _mainCamera;
-    private PlayerInput _playerInput;
+    private Vector3 _mousePosition;
 
     public CircleCollider2D AttackCollider
     {
@@ -60,20 +60,23 @@ public class PlayerWeapon : Weapon
     private void Start()
     {
         _mainCamera = Camera.main;
-        _playerInput = GetComponentInParent<PlayerInput>();
         transform.localPosition = new Vector3(0, movementRadius, 0);
     }
 
     public void OnPointer(InputAction.CallbackContext callbackContext)
     {
-        if (callbackContext.performed)
+        if (callbackContext.performed && !GameManager.GameIsPaused)
         {
-            var cursorLocation = _mainCamera.ScreenToWorldPoint(callbackContext.ReadValue<Vector2>());
-            cursorLocation.z = 0;
-            var newPosition = cursorLocation - transform.parent.position;
-            newPosition = newPosition.normalized * movementRadius;
-
-            transform.localPosition = newPosition;
+            _mousePosition = _mainCamera.ScreenToWorldPoint(callbackContext.ReadValue<Vector2>());
         }
+    }
+
+    private void Update()
+    {
+        _mousePosition.z = 0;
+        var newPosition = _mousePosition - transform.parent.position;
+        newPosition = newPosition.normalized * movementRadius;
+
+        transform.localPosition = newPosition;
     }
 }
