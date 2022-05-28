@@ -54,10 +54,17 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        _player = GameObject.FindWithTag("Player").transform;
+        FindPlayer();
+        GameManager.Instance.GoingBerserkEvent.AddListener(FindPlayer);
+        GameManager.Instance.ResurrectionEvent.AddListener(FindPlayer);
     }
 
-    private void Update()
+    private void FindPlayer()
+    {
+        _player = GameObject.FindWithTag("Player").transform;
+    }
+    
+    private void FixedUpdate()
     {
         if (EnemyUnit.Ready)
         {
@@ -81,10 +88,25 @@ public class EnemyController : MonoBehaviour
             }
 
             Mover.StartMove(Vector3.Normalize(movementVector));
+
+            Collider2D[] colliders =
+                Physics2D.OverlapCircleAll(currentPosition, Collider.radius, LayerMask.GetMask("Player"));
+            foreach (var foundCollider in colliders)
+            {
+                var player = foundCollider.GetComponent<PlayerUnit>();
+                if (player)
+                {
+                    if (!player.IsDead)
+                    {
+                        player.TakeDamage(EnemyUnit.Damage);
+                    }
+                    player.TakeKnockback(movementVector.normalized * EnemyUnit.KnockbackStrength);
+                }
+            }
         }
         else
         {
-            Mover.StartMove(Vector2.zero);
+            Mover.StopMove();
         }
     }
 }

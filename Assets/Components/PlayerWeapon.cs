@@ -12,6 +12,7 @@ public class PlayerWeapon : Weapon
     [SerializeField] private float movementRadius;
     [SerializeField] private float aimingSpeed;
     [SerializeField] private CircleCollider2D attackCollider;
+    [SerializeField] private PlayerUnit player;
     
     private Camera _mainCamera;
     private Vector3 _mousePosition;
@@ -45,7 +46,7 @@ public class PlayerWeapon : Weapon
     
     public override void Use()
     {
-        if (CanUse)
+        if (CanUse && !player.IsDead)
         {
             Animator.SetTrigger("Attack");
             ResetTimer();

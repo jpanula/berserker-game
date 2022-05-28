@@ -29,6 +29,8 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         get { return damageTakenCooldown; }
     }
 
+    public bool IsDead { get; private set; }
+
     public Timer InvulnerabilityTimer
     {
         get
@@ -71,9 +73,12 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     public override bool TakeDamage(int amount)
     {
         bool result = base.TakeDamage(amount);
-        InvulnerabilityTimer.SetTime(damageTakenCooldown);
+        InvulnerabilityTimer.SetTime(DamageTakenCooldown);
         InvulnerabilityTimer.StartTimer();
-        PlayerAnimator.SetTrigger("Damage");
+        if (!Health.IsInvulnerable)
+        {
+            PlayerAnimator.SetTrigger("Damage");
+        }
         return result;
     }
 
@@ -81,8 +86,23 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     {
         playerDeathEvent.Invoke();
         PlayerAnimator.SetBool("Dead", true);
+        IsDead = true;
     }
 
+    public void IsActuallyDead()
+    {
+        playerAnimator.enabled = false;
+        if (GameManager.PlayerIsBerserk)
+        {
+            GameManager.Instance.GameOverEvent.Invoke();
+        }
+        else
+        {
+            GameManager.PlayerIsBerserk = true;
+            GameManager.Instance.GoingBerserkEvent.Invoke();
+        }
+    }
+    
     public void TakeKnockback(Vector2 knockbackVector)
     {
         if (!Health.IsInvulnerable)
@@ -90,14 +110,29 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
             Mover.Physicsbody.AddForce(knockbackVector, ForceMode2D.Impulse);
         }
     }
+
+    private void OnGameOver()
+    {
+        Health.IsInvulnerable = false;
+        Health.DecreaseHealth(Health.MaxHealth);
+    }
     
     private void Start()
     {
-        if (blinkTimer)
+        GameManager.Instance.GameOverEvent.AddListener(OnGameOver);
+        if(blinkCooldown != 0)
         {
-            blinkTimer.SetTime(blinkCooldown + Random.value * blinkVariance);
-            blinkTimer.StartTimer();
+            if (blinkTimer)
+            {
+                blinkTimer.SetTime(blinkCooldown + Random.value * blinkVariance);
+                blinkTimer.StartTimer();
+            }
         }
+    }
+
+    private void OnEnable()
+    {
+        playerAnimator.enabled = true;
     }
 
     private void Update()
@@ -114,16 +149,16 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         PlayerAnimator.SetFloat("MovementSpeed", Mover.Physicsbody.velocity.magnitude * movementSpeedAnimationMultiplier);
         PlayerAnimator.SetBool("IsMoving", Mover.Physicsbody.velocity.magnitude > movementThreshold);
 
-        if (Mover.Physicsbody.velocity.x < 0)
+        if (Mover.Physicsbody.velocity.x < 0  && !IsDead)
         {
             PlayerSpriteRenderer.flipX = true;
         }
-        else if (Mover.Physicsbody.velocity.x > 0)
+        else if (Mover.Physicsbody.velocity.x > 0 && !IsDead)
         {
             PlayerSpriteRenderer.flipX = false;
         }
         
-        if (blinkTimer)
+        if (blinkTimer && blinkCooldown != 0)
         {
             if (!PlayerAnimator.GetBool("IsMoving"))
             {
