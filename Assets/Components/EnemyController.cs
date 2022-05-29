@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     private EnemyUnit _enemyUnit;
     private Transform _player;
     private CircleCollider2D _collider;
+    private Vector3 _movementVector;
     
     public IMover Mover
     {
@@ -71,11 +72,11 @@ public class EnemyController : MonoBehaviour
             var ownTransform = transform;
             var currentPosition = ownTransform.position;
             var playerPosition = _player.position;
-            var movementVector = playerPosition - currentPosition;
+            _movementVector = playerPosition - currentPosition;
             RaycastHit2D hit;
             hit = Physics2D.CircleCast(currentPosition,
-                Collider.radius * Mathf.Max(ownTransform.localScale.x, ownTransform.localScale.y), movementVector,
-                movementVector.magnitude, LayerMask.GetMask("Environment"));
+                Collider.radius * Mathf.Max(ownTransform.localScale.x, ownTransform.localScale.y), _movementVector,
+                _movementVector.magnitude, LayerMask.GetMask("Environment"));
 
             if (hit)
             {
@@ -83,30 +84,29 @@ public class EnemyController : MonoBehaviour
                 if (path.Count >= 1)
                 {
 
-                    movementVector = path[0].Position - currentPosition;
+                    _movementVector = path[0].Position - currentPosition;
                 }
             }
 
-            Mover.StartMove(Vector3.Normalize(movementVector));
-
-            Collider2D[] colliders =
-                Physics2D.OverlapCircleAll(currentPosition, Collider.radius, LayerMask.GetMask("Player"));
-            foreach (var foundCollider in colliders)
-            {
-                var player = foundCollider.GetComponent<PlayerUnit>();
-                if (player)
-                {
-                    if (!player.IsDead)
-                    {
-                        player.TakeDamage(EnemyUnit.Damage);
-                    }
-                    player.TakeKnockback(movementVector.normalized * EnemyUnit.KnockbackStrength);
-                }
-            }
+            Mover.StartMove(Vector3.Normalize(_movementVector));
         }
         else
         {
             Mover.StopMove();
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D col)
+    {
+        var player = col.collider.GetComponent<PlayerUnit>();
+        if (player && EnemyUnit.Ready)
+        {
+            player.TakeKnockback(Vector3.Normalize(_movementVector) * EnemyUnit.KnockbackStrength);
+            if (!player.IsDead)
+            {
+                player.TakeDamage(EnemyUnit.Damage);
+            }
+            Debug.DrawRay(transform.position, (player.transform.position - transform.position) * EnemyUnit.KnockbackStrength, Color.red, 1.0f);
         }
     }
 }

@@ -13,7 +13,6 @@ public class PointRotation : MonoBehaviour
         {
             angle = 360 - angle;
         }
-        Debug.Log(angle);
         transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 }
