@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
     
     public void ChangeScene(string path)
     {
+        ResetGame();
         SceneManager.LoadSceneAsync(path, LoadSceneMode.Single);
     }
 
@@ -105,11 +106,19 @@ public class GameManager : MonoBehaviour
     private void OnGameOver()
     {
         PlayerIsBerserk = false;
+        PauseGame();
     }
     
     private void OnEnemyKill()
     {
         TotalEnemiesKilled++;
+    }
+
+    private void ResetGame()
+    {
+        TotalEnemiesKilled = 0;
+        PlayerIsBerserk = false;
+        ResumeGame();
     }
     
     private void Awake()

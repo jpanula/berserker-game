@@ -201,6 +201,7 @@ MonoBehaviour:
   berserkTimer: {fileID: 4800114445844365522}
   killsNeededText: {fileID: 4800114446341032004}
   resurrectTimeBar: {fileID: 4800114447042844098}
+  resurrectUI: {fileID: 4800114445979680538}
 --- !u!1 &4800114445979680538
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +572,7 @@ MonoBehaviour:
   playerDeathEvent:
     m_PersistentCalls:
       m_Calls: []
-  damageTakenCooldown: 0.5
+  damageTakenCooldown: 1
   blinkCooldown: 0
   blinkVariance: 0
   movementThreshold: 0.8
