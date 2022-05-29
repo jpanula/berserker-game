@@ -431,6 +431,7 @@ MonoBehaviour:
   resurrectTimeBar: {fileID: 4800114447042844098}
   resurrectUI: {fileID: 4800114445979680538}
   slashSpriteRenderer: {fileID: 722926914802239911}
+  berserkerPlayer: {fileID: 4800114446673213930}
 --- !u!1 &4800114445979680538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,7 +1627,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 4
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

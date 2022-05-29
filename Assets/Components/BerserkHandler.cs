@@ -20,6 +20,7 @@ public class BerserkHandler : MonoBehaviour
     [SerializeField] private Slider resurrectTimeBar;
     [SerializeField] private GameObject resurrectUI;
     [FormerlySerializedAs("berserkSpriteRenderer")] [SerializeField] private SpriteRenderer slashSpriteRenderer;
+    [SerializeField] private PlayerUnit berserkerPlayer;
 
     private bool _berserking;
 
@@ -79,7 +80,7 @@ public class BerserkHandler : MonoBehaviour
         if (berserkTimer.IsCompleted && _berserking && !GameManager.GameIsPaused)
         {
             _berserking = false;
-            GameManager.Instance.GameOverEvent.Invoke();
+            berserkerPlayer.Kill();
         }
     }
 }

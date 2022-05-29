@@ -12028,6 +12028,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2312359354765805012, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312359354765805012, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312359354765805012, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312359354765805012, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3215971875357829991, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3215971875357829991, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4800114445844365524, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -12079,6 +12103,46 @@ PrefabInstance:
     - target: {fileID: 4800114445844365527, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
       propertyPath: m_Name
       value: Berserk
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800114446341032007, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800114446341032007, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800114446341032007, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800114446341032007, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800114447042844101, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800114447042844101, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800114447042844101, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800114447042844101, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800114447564074719, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800114447735280397, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6081638803305233028, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -12144,6 +12208,10 @@ PrefabInstance:
     - target: {fileID: 5955943736157617023, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955943736157617023, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8879840218818898398, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
       propertyPath: m_AnchorMax.x
