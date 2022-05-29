@@ -109,6 +109,7 @@ public class EnemyUnit : UnitBase, IKnockbackReceiver
 
     public void OnDeathComplete()
     {
+        SlimeResidueManager.Spawn(transform.position, Color, _spriteRenderer.flipX);
         gameObject.SetActive(false);
         Health.IncreaseHealth(Health.MaxHealth);
     }
