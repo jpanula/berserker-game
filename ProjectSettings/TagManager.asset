@@ -44,6 +44,9 @@ TagManager:
   - name: Floor
     uniqueID: 4139157451
     locked: 0
+  - name: Above Floor
+    uniqueID: 1207583879
+    locked: 0
   - name: Entities
     uniqueID: 1218766833
     locked: 0
