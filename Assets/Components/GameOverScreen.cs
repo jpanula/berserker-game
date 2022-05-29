@@ -17,6 +17,6 @@ public class GameOverScreen : MonoBehaviour
     private void DisplayGameOverScreen()
     {
         gameOverScreen.SetActive(true);
-        gameOverText.SetText("Game Over!\n{0} enemies killed.", GameManager.TotalEnemiesKilled);
+        gameOverText.SetText("Game Over!\n<color=white><size= 96>{0}</size></color> enemies killed.", GameManager.TotalEnemiesKilled);
     }
 }

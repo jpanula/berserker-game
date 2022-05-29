@@ -78,14 +78,13 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         bool result = base.TakeDamage(amount);
         InvulnerabilityTimer.SetTime(DamageTakenCooldown);
         InvulnerabilityTimer.StartTimer();
-        if (InvulnerabilityTimer.IsRunning)
-        {
-            Health.IsInvulnerable = true;
-        }
-
         if (!Health.IsInvulnerable && !GameManager.PlayerIsBerserk)
         {
             PlayerAnimator.SetTrigger("Damage");
+        }
+        if (InvulnerabilityTimer.IsRunning)
+        {
+            Health.IsInvulnerable = true;
         }
         return result;
     }
