@@ -75,6 +75,11 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     public override bool TakeDamage(int amount)
     {
         bool result = base.TakeDamage(amount);
+        if (InvulnerabilityTimer.IsRunning)
+        {
+            Health.IsInvulnerable = true;
+        }
+        
         InvulnerabilityTimer.SetTime(DamageTakenCooldown);
         InvulnerabilityTimer.StartTimer();
         if (!Health.IsInvulnerable)
@@ -93,6 +98,7 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
 
     public void IsActuallyDead()
     {
+        PlayerAnimator.SetBool("Dead", false);
         playerAnimator.enabled = false;
         if (GameManager.PlayerIsBerserk)
         {
@@ -103,6 +109,13 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
             GameManager.PlayerIsBerserk = true;
             GameManager.Instance.GoingBerserkEvent.Invoke();
         }
+    }
+
+    private void OnResurrection()
+    {
+        Health.IncreaseHealth(Health.MaxHealth);
+        IsDead = false;
+        Health.IsInvulnerable = false;
     }
     
     public void TakeKnockback(Vector2 knockbackVector)
@@ -131,6 +144,7 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     private void Start()
     {
         GameManager.Instance.GameOverEvent.AddListener(OnGameOver);
+        GameManager.Instance.ResurrectionEvent.AddListener(OnResurrection);
         if(blinkCooldown != 0)
         {
             if (blinkTimer)
@@ -144,6 +158,10 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     private void OnEnable()
     {
         playerAnimator.enabled = true;
+        InvulnerabilityTimer.Stop();
+        InvulnerabilityTimer.SetTime(DamageTakenCooldown);
+        InvulnerabilityTimer.StartTimer();
+        ResetPlayer();
     }
 
     private void Update()
@@ -187,5 +205,28 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     private void FixedUpdate()
     {
         ExecuteKnockback();
+    }
+
+    private void ResetPlayer()
+    {
+        IsDead = false;
+        Health.IncreaseHealth(Health.MaxHealth);
+        Health.IsInvulnerable = false;
+        if(blinkCooldown != 0)
+        {
+            if (blinkTimer)
+            {
+                blinkTimer.SetTime(blinkCooldown + Random.value * blinkVariance);
+                blinkTimer.StartTimer();
+            }
+        }
+        InvulnerabilityTimer.Stop();
+        InvulnerabilityTimer.SetTime(DamageTakenCooldown);
+        InvulnerabilityTimer.StartTimer();
+        PlayerAnimator.SetFloat("MovementSpeed", 0);
+        PlayerAnimator.SetBool("IsMoving", false);
+        PlayerAnimator.SetBool("Dead", false);
+        _knockbackVectors.Clear();
+        Mover.StopMove();
     }
 }

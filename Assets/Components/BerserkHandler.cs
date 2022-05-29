@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Timer))]
@@ -17,6 +18,8 @@ public class BerserkHandler : MonoBehaviour
     [SerializeField] private Timer berserkTimer;
     [SerializeField] private TextMeshProUGUI killsNeededText;
     [SerializeField] private Slider resurrectTimeBar;
+    [SerializeField] private GameObject resurrectUI;
+    [FormerlySerializedAs("berserkSpriteRenderer")] [SerializeField] private SpriteRenderer slashSpriteRenderer;
 
     private bool _berserking;
 
@@ -27,6 +30,7 @@ public class BerserkHandler : MonoBehaviour
         GameManager.Instance.GoingBerserkEvent.AddListener(ActivateBerserker);
         GameManager.Instance.ResurrectionEvent.AddListener(DeactivateBerserker);
         GameManager.Instance.EnemyKilledEvent.AddListener(OnEnemyKill);
+        GameManager.Instance.GameOverEvent.AddListener(OnGameOver);
     }
 
     private void ActivateBerserker()
@@ -39,14 +43,17 @@ public class BerserkHandler : MonoBehaviour
         berserkTimer.SetTime(timeToResurrect);
         berserkTimer.StartTimer();
         _berserking = true;
+        GameManager.PlayerIsBerserk = true;
     }
 
     private void DeactivateBerserker()
     {
+        slashSpriteRenderer.sprite = null;
         berserker.SetActive(false);
         player.transform.position = berserker.transform.position;
         player.SetActive(true);
         _berserking = false;
+        GameManager.PlayerIsBerserk = false;
     }
 
     private void OnEnemyKill()
@@ -54,18 +61,24 @@ public class BerserkHandler : MonoBehaviour
         EnemiesKilled++;
     }
 
+    private void OnGameOver()
+    {
+        resurrectUI.SetActive(false);
+    }
+
     private void Update()
     {
-        if (EnemiesKilled >= minimumKillsToResurrect)
+        if (EnemiesKilled >= minimumKillsToResurrect && _berserking)
         {
             GameManager.Instance.ResurrectionEvent.Invoke();
         }
         
-        killsNeededText.SetText("Kill {0} enemies\nto resurrect", minimumKillsToResurrect - EnemiesKilled);
+        killsNeededText.SetText("Kill <color="+"red"+"><b><size= 72>{0}</size></b></color> enemies\nto resurrect", minimumKillsToResurrect - EnemiesKilled);
         resurrectTimeBar.value = berserkTimer.CurrentTime / timeToResurrect;
 
-        if (berserkTimer.IsCompleted && _berserking)
+        if (berserkTimer.IsCompleted && _berserking && !GameManager.GameIsPaused)
         {
+            _berserking = false;
             GameManager.Instance.GameOverEvent.Invoke();
         }
     }
