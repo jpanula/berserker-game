@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Timer))]
@@ -18,6 +19,7 @@ public class BerserkHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI killsNeededText;
     [SerializeField] private Slider resurrectTimeBar;
     [SerializeField] private GameObject resurrectUI;
+    [FormerlySerializedAs("berserkSpriteRenderer")] [SerializeField] private SpriteRenderer slashSpriteRenderer;
 
     private bool _berserking;
 
@@ -46,6 +48,7 @@ public class BerserkHandler : MonoBehaviour
 
     private void DeactivateBerserker()
     {
+        slashSpriteRenderer.sprite = null;
         berserker.SetActive(false);
         player.transform.position = berserker.transform.position;
         player.SetActive(true);

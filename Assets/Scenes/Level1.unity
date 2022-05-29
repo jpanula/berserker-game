@@ -11965,6 +11965,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Berserk
       objectReference: {fileID: 0}
+    - target: {fileID: 4800114446673213934, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4800114446673213943, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
       propertyPath: maxSpeed
       value: 20
@@ -12065,6 +12069,10 @@ PrefabInstance:
     - target: {fileID: 5955943736157617023, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955943736157617023, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7551239244725888185, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
       propertyPath: m_AnchorMax.y

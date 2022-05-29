@@ -202,6 +202,7 @@ MonoBehaviour:
   killsNeededText: {fileID: 4800114446341032004}
   resurrectTimeBar: {fileID: 4800114447042844098}
   resurrectUI: {fileID: 4800114445979680538}
+  berserkSpriteRenderer: {fileID: 722926914802239911}
 --- !u!1 &4800114445979680538
 GameObject:
   m_ObjectHideFlags: 0
