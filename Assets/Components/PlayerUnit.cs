@@ -82,7 +82,7 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         
         InvulnerabilityTimer.SetTime(DamageTakenCooldown);
         InvulnerabilityTimer.StartTimer();
-        if (!Health.IsInvulnerable)
+        if (!Health.IsInvulnerable && !GameManager.PlayerIsBerserk)
         {
             PlayerAnimator.SetTrigger("Damage");
         }
@@ -96,6 +96,12 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         IsDead = true;
     }
 
+    public void Kill()
+    {
+        Health.IsInvulnerable = false;
+        TakeDamage(Health.MaxHealth);
+    }
+    
     public void IsActuallyDead()
     {
         PlayerAnimator.SetBool("Dead", false);
@@ -115,6 +121,19 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     {
         Health.IncreaseHealth(Health.MaxHealth);
         IsDead = false;
+        Health.IsInvulnerable = false;
+    }
+
+    private void OnGoingBerserk()
+    {
+        GetComponent<Mover>().enabled = false;
+        Health.IsInvulnerable = true;
+    }
+
+    public void OnGoingBerserkFinished()
+    {
+        ResetPlayer();
+        GetComponent<Mover>().enabled = true;
         Health.IsInvulnerable = false;
     }
     
@@ -145,6 +164,7 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     {
         GameManager.Instance.GameOverEvent.AddListener(OnGameOver);
         GameManager.Instance.ResurrectionEvent.AddListener(OnResurrection);
+        GameManager.Instance.GoingBerserkEvent.AddListener(OnGoingBerserk);
         if(blinkCooldown != 0)
         {
             if (blinkTimer)
@@ -228,5 +248,6 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         PlayerAnimator.SetBool("Dead", false);
         _knockbackVectors.Clear();
         Mover.StopMove();
+        GetComponent<Mover>().enabled = true;
     }
 }

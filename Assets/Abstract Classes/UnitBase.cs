@@ -19,6 +19,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageReceiver
 
             return _mover;
         }
+        protected set { _mover = value; }
     }
 
     public IHealth Health
