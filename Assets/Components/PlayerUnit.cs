@@ -25,6 +25,7 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     [SerializeField] private Timer blinkTimer;
 
     private List<Vector3> _knockbackVectors = new List<Vector3>();
+    private bool _goingBerserk;
 
     public float DamageTakenCooldown
     {
@@ -75,13 +76,13 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     public override bool TakeDamage(int amount)
     {
         bool result = base.TakeDamage(amount);
+        InvulnerabilityTimer.SetTime(DamageTakenCooldown);
+        InvulnerabilityTimer.StartTimer();
         if (InvulnerabilityTimer.IsRunning)
         {
             Health.IsInvulnerable = true;
         }
-        
-        InvulnerabilityTimer.SetTime(DamageTakenCooldown);
-        InvulnerabilityTimer.StartTimer();
+
         if (!Health.IsInvulnerable && !GameManager.PlayerIsBerserk)
         {
             PlayerAnimator.SetTrigger("Damage");
@@ -128,6 +129,7 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     {
         GetComponent<Mover>().enabled = false;
         Health.IsInvulnerable = true;
+        _goingBerserk = true;
     }
 
     public void OnGoingBerserkFinished()
@@ -135,6 +137,7 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         ResetPlayer();
         GetComponent<Mover>().enabled = true;
         Health.IsInvulnerable = false;
+        _goingBerserk = false;
     }
     
     public void TakeKnockback(Vector2 knockbackVector)
@@ -198,11 +201,11 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         PlayerAnimator.SetFloat("MovementSpeed", Mover.Physicsbody.velocity.magnitude * movementSpeedAnimationMultiplier);
         PlayerAnimator.SetBool("IsMoving", Mover.Physicsbody.velocity.magnitude > movementThreshold);
 
-        if (Mover.Physicsbody.velocity.x < 0  && !IsDead)
+        if (Mover.Physicsbody.velocity.x < 0  && !IsDead && !_goingBerserk)
         {
             PlayerSpriteRenderer.flipX = true;
         }
-        else if (Mover.Physicsbody.velocity.x > 0 && !IsDead)
+        else if (Mover.Physicsbody.velocity.x > 0 && !IsDead && !_goingBerserk)
         {
             PlayerSpriteRenderer.flipX = false;
         }

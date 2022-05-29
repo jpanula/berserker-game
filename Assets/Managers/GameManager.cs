@@ -16,11 +16,17 @@ public class GameManager : MonoBehaviour
     private bool _gameIsPaused;
     private bool _playerIsBerserk;
     private int _totalEnemiesKilled;
+    private bool _tutorialShown;
     
     private float _masterVolume = 0.8f;
     private float _sfxVolume = 0.8f;
     private float _musicVolume = 0.8f;
-    
+
+    public static bool TutorialShown
+    {
+        get { return Instance._tutorialShown; }
+        set { Instance._tutorialShown = value; }
+    }
     
     public static bool PlayerIsBerserk
     {
