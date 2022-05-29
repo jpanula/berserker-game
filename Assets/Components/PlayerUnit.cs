@@ -24,6 +24,8 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     [SerializeField] private Timer invulnerabilityTimer;
     [SerializeField] private Timer blinkTimer;
 
+    private List<Vector3> _knockbackVectors = new List<Vector3>();
+
     public float DamageTakenCooldown
     {
         get { return damageTakenCooldown; }
@@ -107,7 +109,7 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     {
         if (!Health.IsInvulnerable)
         {
-            Mover.Physicsbody.AddForce(knockbackVector, ForceMode2D.Impulse);
+            _knockbackVectors.Add(knockbackVector);
         }
     }
 
@@ -115,6 +117,15 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     {
         Health.IsInvulnerable = false;
         Health.DecreaseHealth(Health.MaxHealth);
+    }
+
+    private void ExecuteKnockback()
+    {
+        foreach (var vector in _knockbackVectors)
+        {
+            Mover.Physicsbody.AddForce(vector, ForceMode2D.Impulse);
+        }
+        _knockbackVectors.Clear();
     }
     
     private void Start()
@@ -171,5 +182,10 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
             }
             
         }
+    }
+
+    private void FixedUpdate()
+    {
+        ExecuteKnockback();
     }
 }

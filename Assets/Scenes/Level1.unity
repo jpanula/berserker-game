@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 640, y: -569.375}
+  m_AnchoredPosition: {x: 640, y: -588.125}
   m_SizeDelta: {x: 375, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8628509
@@ -327,8 +327,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -155809845
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -2092,7 +2092,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Over!
+  m_text: 'Game Over!
+
+    0 enemies killed!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a96bc7673a5e45546affa33296630184, type: 2}
   m_sharedMaterial: {fileID: -7040913065992550613, guid: a96bc7673a5e45546affa33296630184, type: 2}
@@ -2186,8 +2188,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 640, y: -155.625}
-  m_SizeDelta: {x: 600, y: 100}
+  m_AnchoredPosition: {x: 640, y: -211.875}
+  m_SizeDelta: {x: 1200, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &151596358
 GameObject:
@@ -2982,7 +2984,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCooldown: 5
-  maxSimultaneousSpawns: 1
+  maxSimultaneousSpawns: 4
+  minSimultaneousSpawns: 1
   spawnArea: {x: 4, y: 4}
   colors:
   - {r: 1, g: 0, b: 0, a: 1}
@@ -3810,7 +3813,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 640, y: -286.875}
+  m_AnchoredPosition: {x: 640, y: -380.625}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1000363910
@@ -4123,8 +4126,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2009413175
+  m_SortingLayer: 4
   m_SortingOrder: 4
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -4596,8 +4599,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -155809845
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -9209,7 +9212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 640, y: -413.125}
+  m_AnchoredPosition: {x: 640, y: -469.375}
   m_SizeDelta: {x: 375, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1269846759
@@ -9357,7 +9360,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346974509}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8688718, y: 0.15182471, z: 0.03331783}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9435,9 +9438,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingLayerID: 1207583879
+  m_SortingLayer: 2
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -9891,9 +9894,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: 1207583879
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -11898,6 +11901,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2492000404323864459, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2492000404323864459, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4800114445844365524, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -11950,6 +11961,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Berserk
       objectReference: {fileID: 0}
+    - target: {fileID: 4800114446673213943, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: maxSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4800114447564074719, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -11987,10 +12002,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 652668022347394555, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
-      propertyPath: gameOverScreen
-      value: 
-      objectReference: {fileID: 1841542267}
     - target: {fileID: 1855460193730346346, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -12035,18 +12046,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2476993752690672096, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2476993752690672096, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5775343688853447129, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
       propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1162405476}
-    - target: {fileID: 5775343688853447129, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
-      propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HandlePause
-      objectReference: {fileID: 0}
     - target: {fileID: 5955943736157617023, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 652668022347394555, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
+    - target: {fileID: 7551239244725888185, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a7ad5e65b448db4ea41a0bd98c074e7, type: 3}

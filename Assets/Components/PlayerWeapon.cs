@@ -5,31 +5,17 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CircleCollider2D))]
 public class PlayerWeapon : Weapon
 {
     
     [SerializeField] private float movementRadius;
     [SerializeField] private float aimingSpeed;
-    [SerializeField] private CircleCollider2D attackCollider;
     [SerializeField] private PlayerUnit player;
     
     private Camera _mainCamera;
     private Vector3 _mousePosition;
     private Animator _animator;
-
-    public CircleCollider2D AttackCollider
-    {
-        get
-        {
-            if (attackCollider == null)
-            {
-                attackCollider = GetComponent<CircleCollider2D>();
-            }
-
-            return attackCollider;
-        }
-    }
+    private bool _used;
 
     public Animator Animator
     {
@@ -50,31 +36,10 @@ public class PlayerWeapon : Weapon
         {
             Animator.SetTrigger("Attack");
             ResetTimer();
-            List<Collider2D> hitColliders = new List<Collider2D>();
-            AttackCollider.GetContacts(hitColliders);
-            foreach (var collider in hitColliders)
-            {
-                if (collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-                {
-                    
-                    if (collider.GetComponent<IDamageReceiver>() != null)
-                    {
-                        collider.GetComponent<IDamageReceiver>().TakeDamage(Damage);
-                    }
-
-                    if (collider.GetComponent<IKnockbackReceiver>() != null)
-                    {
-                        collider.GetComponent<IKnockbackReceiver>()
-                            .TakeKnockback(
-                                (collider.transform.position - transform.parent.position) * KnockbackStrength);
-                    }
-                }
-            }
+            _used = true;
         }
     }
-    
-//TODO separate pointer maybe
-    
+
     private void Start()
     {
         _mainCamera = Camera.main;
@@ -96,5 +61,16 @@ public class PlayerWeapon : Weapon
         newPosition = newPosition.normalized * movementRadius;
 
         transform.localPosition = newPosition;
+    }
+
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        var enemy = col.GetComponent<EnemyUnit>();
+        if (enemy && _used)
+        {
+            enemy.TakeKnockback(Vector3.Normalize(transform.right) * KnockbackStrength);
+            enemy.TakeDamage(Damage);
+            _used = false;
+        }
     }
 }
