@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private float spawnCooldown;
     [SerializeField] private int maxSimultaneousSpawns;
+    [SerializeField] private int minSimultaneousSpawns;
     [SerializeField] private Vector2 spawnArea;
     [SerializeField] private Color[] colors;
     [SerializeField] private Timer spawnTimer;
@@ -17,7 +18,8 @@ public class EnemySpawner : MonoBehaviour
     {
         if (EnemyPool.ActiveEnemies < EnemyPool.MaxActiveEnemies && spawnTimer.IsCompleted)
         {
-            for (int i = 0; i < maxSimultaneousSpawns; i++)
+            var spawns = Random.Range(minSimultaneousSpawns, maxSimultaneousSpawns);
+            for (int i = 0; i < spawns; i++)
             {
                 var spawnPosition = new Vector3(transform.position.x + Random.Range(0, spawnArea.x),
                     transform.position.y + Random.Range(0, spawnArea.y), 0);

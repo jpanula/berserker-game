@@ -106,7 +106,6 @@ public class EnemyController : MonoBehaviour
             {
                 player.TakeDamage(EnemyUnit.Damage);
             }
-            Debug.DrawRay(transform.position, (player.transform.position - transform.position) * EnemyUnit.KnockbackStrength, Color.red, 1.0f);
         }
     }
 }

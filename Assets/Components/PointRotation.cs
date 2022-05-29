@@ -9,7 +9,7 @@ public class PointRotation : MonoBehaviour
     {
         var angle = Vector3.Angle(Vector3.right,
             transform.position - pointGameObject.transform.position);
-        if (transform.parent.localPosition.y < 0)
+        if (transform.localPosition.y < 0)
         {
             angle = 360 - angle;
         }
