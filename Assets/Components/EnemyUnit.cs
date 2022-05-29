@@ -18,6 +18,7 @@ public class EnemyUnit : UnitBase, IKnockbackReceiver
 
     private SpriteRenderer _spriteRenderer;
     private CircleCollider2D _collider;
+    private List<Vector3> _knockbackVectors = new List<Vector3>();
 
     public int Damage
     {
@@ -85,9 +86,21 @@ public class EnemyUnit : UnitBase, IKnockbackReceiver
 
     public void TakeKnockback(Vector2 knockbackVector)
     {
-        Mover.Physicsbody.AddForce(knockbackVector, ForceMode2D.Impulse);
+        if (!Health.IsInvulnerable)
+        {
+            _knockbackVectors.Add(knockbackVector);
+        }
     }
 
+    private void ExecuteKnockback()
+    {
+        foreach (var vector in _knockbackVectors)
+        {
+            Mover.Physicsbody.AddForce(vector, ForceMode2D.Impulse);
+        }
+        _knockbackVectors.Clear();
+    }
+    
     public void OnSpawnComplete()
     {
         Ready = true;
@@ -113,5 +126,10 @@ public class EnemyUnit : UnitBase, IKnockbackReceiver
         {
             _spriteRenderer.flipX = false;
         }
+    }
+    
+    private void FixedUpdate()
+    {
+        ExecuteKnockback();
     }
 }
