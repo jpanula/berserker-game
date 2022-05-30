@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
@@ -13,14 +14,18 @@ public class GameManager : MonoBehaviour
     public UnityEvent ResurrectionEvent;
     public UnityEvent EnemyKilledEvent;
 
+    [SerializeField] private AudioSource clickAudioSource;
+
+    [SerializeField] private AudioMixer audioMixer;
+
     private bool _gameIsPaused;
     private bool _playerIsBerserk = false;
     private int _totalEnemiesKilled;
     private bool _tutorialShown;
     
-    private float _masterVolume = 0.8f;
-    private float _sfxVolume = 0.8f;
-    private float _musicVolume = 0.8f;
+    private float _masterVolume = 0.7f;
+    private float _sfxVolume = 0.7f;
+    private float _musicVolume = 0.7f;
 
     public static bool EnemiesActive { get; set; }
     
@@ -92,22 +97,30 @@ public class GameManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
+
+    public static void PlayClick()
+    {
+        Instance.clickAudioSource.Play();
+    }
     
     public static void SetMasterVolume(float value)
     {
         MasterVolume = value;
+        Instance.audioMixer.SetFloat("MasterVolume", Mathf.Log(MasterVolume) * 20);
         PlayerPrefs.SetFloat("MasterVolume", value);
     }
 
     public static void SetSfxVolume(float value)
     {
         SfxVolume = value;
+        Instance.audioMixer.SetFloat("SfxVolume", Mathf.Log(SfxVolume) * 20);
         PlayerPrefs.SetFloat("SfxVolume", value);
     }
 
     public static void SetMusicVolume(float value)
     {
         MusicVolume = value;
+        Instance.audioMixer.SetFloat("MusicVolume", Mathf.Log(MusicVolume) * 20);
         PlayerPrefs.SetFloat("MusicVolume", value);
     }
 
@@ -162,4 +175,10 @@ public class GameManager : MonoBehaviour
         EnemiesActive = true;
     }
 
+    private void Start()
+    {
+        audioMixer.SetFloat("MasterVolume", Mathf.Log(MasterVolume) * 20);
+        audioMixer.SetFloat("MusicVolume", Mathf.Log(MusicVolume) * 20);
+        audioMixer.SetFloat("SfxVolume", Mathf.Log(SfxVolume) * 20);
+    }
 }
