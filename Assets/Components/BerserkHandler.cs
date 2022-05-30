@@ -45,6 +45,8 @@ public class BerserkHandler : MonoBehaviour
         berserkTimer.StartTimer();
         _berserking = true;
         GameManager.PlayerIsBerserk = true;
+        berserkerPlayer.GoingBerserk = true;
+        berserkerPlayer.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     private void DeactivateBerserker()

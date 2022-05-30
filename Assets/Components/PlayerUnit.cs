@@ -23,10 +23,19 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private Timer invulnerabilityTimer;
     [SerializeField] private Timer blinkTimer;
+    [SerializeField] private TrailRenderer[] trails;
+    [SerializeField] private GameObject trailParent;
 
     private List<Vector3> _knockbackVectors = new List<Vector3>();
     private bool _goingBerserk;
+    private bool _trailsFlipped;
 
+    public bool GoingBerserk
+    {
+        get { return _goingBerserk; }
+        set { _goingBerserk = value; }
+    }
+    
     public float DamageTakenCooldown
     {
         get { return damageTakenCooldown; }
@@ -76,12 +85,17 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     public override bool TakeDamage(int amount)
     {
         bool result = base.TakeDamage(amount);
-        InvulnerabilityTimer.SetTime(DamageTakenCooldown);
-        InvulnerabilityTimer.StartTimer();
         if (!Health.IsInvulnerable && !GameManager.PlayerIsBerserk)
         {
             PlayerAnimator.SetTrigger("Damage");
         }
+        if (!Health.IsInvulnerable)
+        {
+            InvulnerabilityTimer.SetTime(DamageTakenCooldown);
+            InvulnerabilityTimer.StartTimer();
+            Health.IsInvulnerable = true;
+        }
+        
         if (InvulnerabilityTimer.IsRunning)
         {
             Health.IsInvulnerable = true;
@@ -94,6 +108,8 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         playerDeathEvent.Invoke();
         PlayerAnimator.SetBool("Dead", true);
         IsDead = true;
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        GameManager.EnemiesActive = false;
     }
 
     public void Kill()
@@ -114,6 +130,7 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         {
             GameManager.PlayerIsBerserk = true;
             GameManager.Instance.GoingBerserkEvent.Invoke();
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
@@ -122,6 +139,7 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         Health.IncreaseHealth(Health.MaxHealth);
         IsDead = false;
         Health.IsInvulnerable = false;
+        _goingBerserk = false;
     }
 
     private void OnGoingBerserk()
@@ -137,6 +155,8 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         GetComponent<Mover>().enabled = true;
         Health.IsInvulnerable = false;
         _goingBerserk = false;
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        GameManager.EnemiesActive = true;
     }
     
     public void TakeKnockback(Vector2 knockbackVector)
@@ -200,13 +220,35 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         PlayerAnimator.SetFloat("MovementSpeed", Mover.Physicsbody.velocity.magnitude * movementSpeedAnimationMultiplier);
         PlayerAnimator.SetBool("IsMoving", Mover.Physicsbody.velocity.magnitude > movementThreshold);
 
+        foreach (var trail in trails)
+        {
+            if (trail != null)
+            {
+                trail.emitting = PlayerAnimator.GetBool("IsMoving");
+            }
+        }
+
+        if (trailParent != null)
+        {
+            if (_trailsFlipped)
+            {
+                trailParent.transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                trailParent.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+        
         if (Mover.Physicsbody.velocity.x < 0  && !IsDead && !_goingBerserk)
         {
             PlayerSpriteRenderer.flipX = true;
+            _trailsFlipped = true;
         }
         else if (Mover.Physicsbody.velocity.x > 0 && !IsDead && !_goingBerserk)
         {
             PlayerSpriteRenderer.flipX = false;
+            _trailsFlipped = false;
         }
         
         if (blinkTimer && blinkCooldown != 0)
