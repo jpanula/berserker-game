@@ -67,7 +67,7 @@ public class EnemyController : MonoBehaviour
     
     private void FixedUpdate()
     {
-        if (EnemyUnit.Ready)
+        if (EnemyUnit.Ready && GameManager.EnemiesActive)
         {
             var ownTransform = transform;
             var currentPosition = ownTransform.position;

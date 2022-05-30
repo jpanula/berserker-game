@@ -14,13 +14,21 @@ public class GameManager : MonoBehaviour
     public UnityEvent EnemyKilledEvent;
 
     private bool _gameIsPaused;
-    private bool _playerIsBerserk;
+    private bool _playerIsBerserk = false;
     private int _totalEnemiesKilled;
+    private bool _tutorialShown;
     
     private float _masterVolume = 0.8f;
     private float _sfxVolume = 0.8f;
     private float _musicVolume = 0.8f;
+
+    public static bool EnemiesActive { get; set; }
     
+    public static bool TutorialShown
+    {
+        get { return Instance._tutorialShown; }
+        set { Instance._tutorialShown = value; }
+    }
     
     public static bool PlayerIsBerserk
     {
@@ -118,6 +126,7 @@ public class GameManager : MonoBehaviour
     {
         TotalEnemiesKilled = 0;
         PlayerIsBerserk = false;
+        EnemiesActive = true;
         ResumeGame();
     }
     
@@ -150,6 +159,7 @@ public class GameManager : MonoBehaviour
         
         EnemyKilledEvent.AddListener(OnEnemyKill);
         GameOverEvent.AddListener(OnGameOver);
+        EnemiesActive = true;
     }
 
 }
