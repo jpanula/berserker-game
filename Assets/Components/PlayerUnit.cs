@@ -25,10 +25,15 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
     [SerializeField] private Timer blinkTimer;
     [SerializeField] private TrailRenderer[] trails;
     [SerializeField] private GameObject trailParent;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip damageAudio;
+    [SerializeField] private AudioClip spawnAudio;
+    [SerializeField] private AudioClip deathAudio;
 
     private List<Vector3> _knockbackVectors = new List<Vector3>();
     private bool _goingBerserk;
     private bool _trailsFlipped;
+    private bool _killed;
 
     public bool GoingBerserk
     {
@@ -88,6 +93,11 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         if (!Health.IsInvulnerable && !GameManager.PlayerIsBerserk)
         {
             PlayerAnimator.SetTrigger("Damage");
+            if (Health.CurrentHealth != 0)
+            {
+                audioSource.clip = damageAudio;
+                audioSource.Play();
+            }
         }
         if (!Health.IsInvulnerable)
         {
@@ -109,11 +119,14 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         PlayerAnimator.SetBool("Dead", true);
         IsDead = true;
         GameManager.EnemiesActive = false;
+        audioSource.clip = deathAudio;
+        audioSource.Play();
     }
 
     public void Kill()
     {
         Health.IsInvulnerable = false;
+        _killed = true;
         TakeDamage(Health.MaxHealth);
     }
     
@@ -135,10 +148,13 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
 
     private void OnResurrection()
     {
-        Health.IncreaseHealth(Health.MaxHealth);
-        IsDead = false;
-        Health.IsInvulnerable = false;
-        _goingBerserk = false;
+        if (!_killed)
+        {
+            Health.IncreaseHealth(Health.MaxHealth);
+            IsDead = false;
+            Health.IsInvulnerable = false;
+            _goingBerserk = false;
+        }
     }
 
     private void OnGoingBerserk()
@@ -203,6 +219,8 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         InvulnerabilityTimer.SetTime(DamageTakenCooldown);
         InvulnerabilityTimer.StartTimer();
         ResetPlayer();
+        audioSource.clip = spawnAudio;
+        audioSource.Play();
     }
 
     private void Update()
@@ -292,5 +310,6 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         _knockbackVectors.Clear();
         Mover.StopMove();
         GetComponent<Mover>().enabled = true;
+        _killed = false;
     }
 }

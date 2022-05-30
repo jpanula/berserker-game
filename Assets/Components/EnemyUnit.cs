@@ -15,6 +15,10 @@ public class EnemyUnit : UnitBase, IKnockbackReceiver
     [SerializeField] private float movementThreshold;
     [SerializeField] private int damage;
     [SerializeField] private float knockbackStrength;
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip spawnSound;
+    [SerializeField] private AudioClip damageSound;
+    [SerializeField] private AudioSource audioSource;
 
     private SpriteRenderer _spriteRenderer;
     private CircleCollider2D _collider;
@@ -70,6 +74,8 @@ public class EnemyUnit : UnitBase, IKnockbackReceiver
         OwnCollider.enabled = false;
         EnemyAnimator.SetBool("Dead", true);
         GameManager.Instance.EnemyKilledEvent.Invoke();
+        audioSource.clip = deathSound;
+        audioSource.Play();
     }
 
     protected override void Awake()
@@ -82,6 +88,8 @@ public class EnemyUnit : UnitBase, IKnockbackReceiver
     {
         _spriteRenderer.color = color;
         OwnCollider.enabled = true;
+        audioSource.clip = spawnSound;
+        audioSource.Play();
     }
 
     public void TakeKnockback(Vector2 knockbackVector)
@@ -90,6 +98,13 @@ public class EnemyUnit : UnitBase, IKnockbackReceiver
         {
             _knockbackVectors.Add(knockbackVector);
         }
+    }
+
+    public override bool TakeDamage(int amount)
+    {
+        audioSource.clip = damageSound;
+        audioSource.Play();
+        return base.TakeDamage(amount);
     }
 
     private void ExecuteKnockback()

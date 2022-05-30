@@ -12,6 +12,8 @@ public class PlayerWeapon : Weapon
     [SerializeField] private float aimingSpeed;
     [SerializeField] private PlayerUnit player;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip fireAudio;
     
     private Camera _mainCamera;
     private Vector3 _mousePosition;
@@ -36,6 +38,8 @@ public class PlayerWeapon : Weapon
         if (CanUse && !player.IsDead)
         {
             Animator.SetTrigger("Attack");
+            audioSource.clip = fireAudio;
+            audioSource.Play();
             if (GameManager.PlayerIsBerserk)
             {
                 playerAnimator.SetTrigger("Attack");
