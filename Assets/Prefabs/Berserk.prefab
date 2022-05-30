@@ -2090,7 +2090,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   cooldownTime: 0.2
-  knockbackStrength: 40
+  knockbackStrength: 60
   cooldownTimer: {fileID: 3650961922360471362}
   movementRadius: 1.6
   aimingSpeed: 3

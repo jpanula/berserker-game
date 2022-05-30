@@ -90,11 +90,12 @@ public class BerserkHandler : MonoBehaviour
 
     private void Update()
     {
+        _berserking = GameManager.PlayerIsBerserk;
         if (EnemiesKilled >= minimumKillsToResurrect && _berserking)
         {
             GameManager.Instance.ResurrectionEvent.Invoke();
         }
-        
+
         killsNeededText.SetText("<alpha=#AA>Kill <alpha=#FF><color="+"red"+"><b><size= 72>{0}</size></b></color><alpha=#AA> enemies\nto resurrect", minimumKillsToResurrect - EnemiesKilled);
         resurrectTimeBar.value = berserkTimer.CurrentTime / timeToResurrect;
 
