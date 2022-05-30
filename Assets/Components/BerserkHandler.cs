@@ -21,7 +21,8 @@ public class BerserkHandler : MonoBehaviour
     [SerializeField] private GameObject resurrectUI;
     [FormerlySerializedAs("berserkSpriteRenderer")] [SerializeField] private SpriteRenderer slashSpriteRenderer;
     [SerializeField] private PlayerUnit berserkerPlayer;
-
+    [SerializeField] private float knockbackStrength = 40;
+    [SerializeField] private float knockbackRadius = 2.5f;
     private bool _berserking;
 
     public int EnemiesKilled { get; private set; }
@@ -47,6 +48,15 @@ public class BerserkHandler : MonoBehaviour
         GameManager.PlayerIsBerserk = true;
         berserkerPlayer.GoingBerserk = true;
         berserkerPlayer.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        var overlapColliders = Physics2D.OverlapCircleAll(berserker.transform.position, knockbackRadius, LayerMask.GetMask("Enemy"));
+        foreach (var collider in overlapColliders)
+        {
+            var enemy = collider.GetComponent<EnemyUnit>();
+            if (enemy)
+            {
+                enemy.TakeKnockback(Vector3.Normalize(enemy.transform.position - berserker.transform.position) * knockbackStrength);
+            }
+        }
     }
 
     private void DeactivateBerserker()
@@ -57,6 +67,15 @@ public class BerserkHandler : MonoBehaviour
         player.SetActive(true);
         _berserking = false;
         GameManager.PlayerIsBerserk = false;
+        var overlapColliders = Physics2D.OverlapCircleAll(player.transform.position, knockbackRadius, LayerMask.GetMask("Enemy"));
+        foreach (var collider in overlapColliders)
+        {
+            var enemy = collider.GetComponent<EnemyUnit>();
+            if (enemy)
+            {
+                enemy.TakeKnockback(Vector3.Normalize(enemy.transform.position - player.transform.position) * knockbackStrength);
+            }
+        }
     }
 
     private void OnEnemyKill()

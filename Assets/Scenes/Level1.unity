@@ -13972,6 +13972,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 684468870}
+    - target: {fileID: 4800114445844365525, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
+      propertyPath: knockbackStrength
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 4800114445844365527, guid: cf4078218e54cba4d85afd33537d4b3a, type: 3}
       propertyPath: m_Name
       value: Berserk

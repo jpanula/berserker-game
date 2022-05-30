@@ -108,7 +108,6 @@ public class PlayerUnit : UnitBase, IKnockbackReceiver
         playerDeathEvent.Invoke();
         PlayerAnimator.SetBool("Dead", true);
         IsDead = true;
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         GameManager.EnemiesActive = false;
     }
 
