@@ -1706,6 +1706,7 @@ MonoBehaviour:
   movementRadius: 1.6
   aimingSpeed: 3
   player: {fileID: 4800114446673213930}
+  playerAnimator: {fileID: 4800114446673213931}
 --- !u!95 &5195662053802310306
 Animator:
   serializedVersion: 4
