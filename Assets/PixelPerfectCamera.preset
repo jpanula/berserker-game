@@ -30,15 +30,15 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_RefResolutionX
-    value: 320
+    value: 420
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_RefResolutionY
-    value: 200
+    value: 240
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_UpscaleRT
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_PixelSnapping
@@ -46,14 +46,14 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_CropFrameX
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_CropFrameY
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_StretchFill
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   m_ExcludedProperties: []
