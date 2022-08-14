@@ -21,5 +21,6 @@ Use WASD to move, the mouse to aim and left click to attack.
 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
 This game was a submission to the [GameDev.tv 2022 Game Jam](https://itch.io/jam/gamedevtv-jam-2022).
+[You can find the game on itch.io here.](https://waryax.itch.io/too-angry-to-die).
 
 ![Slime Wobble](https://user-images.githubusercontent.com/36760832/171061809-c615ba4d-deed-47de-8e0e-35b70bf7c0ff.gif)
